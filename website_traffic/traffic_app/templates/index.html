@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block title %}Accueil - Prédicteur de Trafic Web{% endblock %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="display-4 fw-bold mb-3">
+        <i class="fas fa-chart-line text-primary"></i> Prédicteur de Trafic Web
+    </h1>
+    <p class="lead text-muted">
+        Utilisez l'intelligence artificielle pour prédire le taux de conversion de votre site web
+        en fonction de ses métriques de performance.
+    </p>
+</div>
+
+<div class="row mb-5">
+    <div class="col-md-10 mx-auto">
+        <div class="card">
+            <div class="card-body p-5">
+                <h3 class="card-title text-center mb-4">
+                    <i class="fas fa-database me-2"></i>Dataset Utilisé
+                </h3>
+                <p class="card-text">
+                    Notre modèle est entraîné sur le dataset <strong>"Website Traffic and User Engagement Metrics"</strong>
+                    qui contient <strong>2000 enregistrements</strong> avec <strong>7 caractéristiques</strong> :
+                </p>
+                
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="fas fa-eye text-primary me-2"></i>
+                                <strong>Page Views :</strong> Nombre de pages vues
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-clock text-primary me-2"></i>
+                                <strong>Session Duration :</strong> Durée de session (minutes)
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-sign-out-alt text-primary me-2"></i>
+                                <strong>Bounce Rate :</strong> Taux de rebond (%)
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-traffic-light text-primary me-2"></i>
+                                <strong>Traffic Source :</strong> Source du trafic
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="fas fa-stopwatch text-primary me-2"></i>
+                                <strong>Time on Page :</strong> Temps sur page (minutes)
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-history text-primary me-2"></i>
+                                <strong>Previous Visits :</strong> Visites précédentes
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-bullseye text-primary me-2"></i>
+                                <strong>Conversion Rate :</strong> Taux de conversion (%)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="https://www.kaggle.com/datasets/anthonytherrien/website-traffic" 
+                       class="btn btn-outline-primary me-2" target="_blank">
+                        <i class="fab fa-kaggle me-1"></i> Voir sur Kaggle
+                    </a>
+                    <a href="/predict/" class="btn btn-primary">
+                        <i class="fas fa-magic me-1"></i> Essayer la prédiction
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row text-center">
+    <h3 class="mb-4">Fonctionnalités Principales</h3>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h5>Modèle IA Prédictif</h5>
+                <p>Random Forest algorithm entraîné sur 2000 échantillons pour des prédictions précises.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <h5>Analyse en Temps Réel</h5>
+                <p>Prédisez le taux de conversion instantanément en fonction des métriques de votre site.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="feature-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h5>Recommandations Intelligentes</h5>
+                <p>Recevez des suggestions pour améliorer les performances de votre site web.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-5">
+    <a href="/predict/" class="btn btn-primary btn-lg px-5 py-3">
+        <i class="fas fa-rocket me-2"></i> Commencer Maintenant
+    </a>
+</div>
+{% endblock %}

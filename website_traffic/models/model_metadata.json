@@ -1,0 +1,25 @@
+{
+  "target": "Conversion Rate",
+  "features": [
+    "Page Views",
+    "Session Duration",
+    "Bounce Rate",
+    "Traffic Source",
+    "Time on Page",
+    "Previous Visits"
+  ],
+  "features_encoded": [
+    "Page Views",
+    "Session Duration",
+    "Bounce Rate",
+    "Traffic Source_encoded",
+    "Time on Page",
+    "Previous Visits"
+  ],
+  "performance": {
+    "mae": 0.021883932959118165,
+    "mse": 0.002465824913066797,
+    "rmse": 0.04965707314237114,
+    "r2": 0.21037100566380806
+  }
+}

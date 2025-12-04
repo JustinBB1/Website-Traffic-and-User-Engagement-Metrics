@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% block title %}Prédiction - WebTraffic Predictor{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">
+                    <i class="fas fa-magic me-2"></i>Prédire le Taux de Conversion
+                </h3>
+            </div>
+            <div class="card-body">
+                <p class="text-muted mb-4">
+                    Remplissez les champs ci-dessous avec les métriques de votre site web
+                    pour prédire le taux de conversion.
+                </p>
+                
+                <form method="POST" action="/result/">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <i class="fas fa-eye me-1"></i>Page Views
+                            </label>
+                            <input type="number" class="form-control" name="page_views" 
+                                   min="1" max="50" step="1" value="5" required>
+                            <div class="form-text">
+                                Nombre de pages vues par session (1-50)
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <i class="fas fa-clock me-1"></i>Session Duration (minutes)
+                            </label>
+                            <input type="number" class="form-control" name="session_duration" 
+                                   min="0.1" max="60" step="0.1" value="3.5" required>
+                            <div class="form-text">
+                                Durée moyenne d'une session en minutes
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <i class="fas fa-sign-out-alt me-1"></i>Bounce Rate (%)
+                            </label>
+                            <input type="number" class="form-control" name="bounce_rate" 
+                                   min="0" max="100" step="0.1" value="35.5" required>
+                            <div class="form-text">
+                                Pourcentage de visiteurs qui quittent après une page
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <i class="fas fa-traffic-light me-1"></i>Traffic Source
+                            </label>
+                            <select class="form-select" name="traffic_source" required>
+                                {% for source in traffic_sources %}
+                                <option value="{{ source }}" 
+                                        {% if source == "Organic" %}selected{% endif %}>
+                                    {{ source }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                            <div class="form-text">
+                                Source principale du trafic
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <i class="fas fa-stopwatch me-1"></i>Time on Page (minutes)
+                            </label>
+                            <input type="number" class="form-control" name="time_on_page" 
+                                   min="0.1" max="10" step="0.1" value="2.5" required>
+                            <div class="form-text">
+                                Temps moyen passé sur une page
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <i class="fas fa-history me-1"></i>Previous Visits
+                            </label>
+                            <input type="number" class="form-control" name="previous_visits" 
+                                   min="0" max="100" step="1" value="3" required>
+                            <div class="form-text">
+                                Nombre moyen de visites précédentes
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info mt-4">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Note :</strong> Ces valeurs sont utilisées pour entraîner notre modèle 
+                        Random Forest. La prédiction sera affichée sur la page suivante.
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg px-5">
+                            <i class="fas fa-bolt me-2"></i>Générer la Prédiction
+                        </button>
+                        <a href="/" class="btn btn-outline-secondary btn-lg ms-2">
+                            <i class="fas fa-home me-2"></i>Retour à l'accueil
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fas fa-lightbulb me-2"></i>Conseils pour de meilleures prédictions
+                </h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <i class="fas fa-check text-success me-2"></i>
+                        Utilisez des données réelles de Google Analytics si possible
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-check text-success me-2"></i>
+                        Pour le Bounce Rate, visez entre 20% et 40% pour un site standard
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-check text-success me-2"></i>
+                        La durée de session idéale varie entre 2 et 5 minutes
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-check text-success me-2"></i>
+                        Le trafic "Organic" (organique) a généralement un meilleur taux de conversion
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

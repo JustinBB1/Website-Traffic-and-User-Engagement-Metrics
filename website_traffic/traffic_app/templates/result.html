@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+
+{% block title %}Résultats - WebTraffic Predictor{% endblock %}
+
+{% block extra_css %}
+<style>
+    .prediction-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 15px;
+    }
+    .recommendation-card {
+        border-left: 4px solid;
+    }
+    .recommendation-warning {
+        border-left-color: #ffc107;
+    }
+    .recommendation-success {
+        border-left-color: #198754;
+    }
+    .recommendation-info {
+        border-left-color: #0dcaf0;
+    }
+    .recommendation-danger {
+        border-left-color: #dc3545;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-10 mx-auto">
+        <!-- Carte de prédiction principale -->
+        <div class="card prediction-card shadow-lg mb-4">
+            <div class="card-body text-center py-5">
+                <h1 class="display-1 fw-bold mb-3">{{ prediction }}%</h1>
+                <h3 class="mb-4">Taux de Conversion Prédit</h3>
+                <p class="lead mb-0">
+                    Basé sur l'analyse de vos métriques de site web
+                </p>
+            </div>
+        </div>
+        
+        <!-- Résumé des inputs -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4 class="mb-0">
+                    <i class="fas fa-chart-bar me-2"></i>Métriques Analysées
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary bg-opacity-10 p-3 rounded me-3">
+                                <i class="fas fa-eye fa-2x text-primary"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Page Views</h6>
+                                <p class="mb-0 fs-5 fw-bold">{{ inputs.page_views }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-3">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-success bg-opacity-10 p-3 rounded me-3">
+                                <i class="fas fa-clock fa-2x text-success"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Session Duration</h6>
+                                <p class="mb-0 fs-5 fw-bold">{{ inputs.session_duration }} min</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-3">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-warning bg-opacity-10 p-3 rounded me-3">
+                                <i class="fas fa-sign-out-alt fa-2x text-warning"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Bounce Rate</h6>
+                                <p class="mb-0 fs-5 fw-bold">{{ inputs.bounce_rate }}%</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-3">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-info bg-opacity-10 p-3 rounded me-3">
+                                <i class="fas fa-traffic-light fa-2x text-info"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Traffic Source</h6>
+                                <p class="mb-0 fs-5 fw-bold">{{ inputs.traffic_source }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-3">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-secondary bg-opacity-10 p-3 rounded me-3">
+                                <i class="fas fa-stopwatch fa-2x text-secondary"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Time on Page</h6>
+                                <p class="mb-0 fs-5 fw-bold">{{ inputs.time_on_page }} min</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-3">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-dark bg-opacity-10 p-3 rounded me-3">
+                                <i class="fas fa-history fa-2x text-dark"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Previous Visits</h6>
+                                <p class="mb-0 fs-5 fw-bold">{{ inputs.previous_visits }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recommandations -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4 class="mb-0">
+                    <i class="fas fa-lightbulb me-2"></i>Recommandations pour Améliorer
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    {% for rec in recommendations %}
+                    <div class="col-md-6 mb-3">
+                        <div class="card recommendation-card recommendation-{{ rec.color }} h-100">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div class="me-3">
+                                        <i class="fas {{ rec.icon }} fa-2x text-{{ rec.color }}"></i>
+                                    </div>
+                                    <div>
+                                        <p class="mb-0">{{ rec.text }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Actions -->
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="mb-4">Que souhaitez-vous faire ensuite ?</h5>
+                <a href="/predict/" class="btn btn-primary btn-lg me-3">
+                    <i class="fas fa-redo me-2"></i>Nouvelle Prédiction
+                </a>
+                <a href="/" class="btn btn-outline-secondary btn-lg me-3">
+                    <i class="fas fa-home me-2"></i>Retour à l'Accueil
+                </a>
+                <button class="btn btn-outline-info btn-lg" onclick="window.print()">
+                    <i class="fas fa-print me-2"></i>Imprimer les Résultats
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

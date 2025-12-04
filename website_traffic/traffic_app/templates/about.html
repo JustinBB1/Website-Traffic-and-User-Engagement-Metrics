@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block title %}À Propos - WebTraffic Predictor{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-10 mx-auto">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h1 class="card-title text-center mb-4">
+                    <i class="fas fa-info-circle me-2"></i>À Propos du Projet
+                </h1>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Objectif du Projet</h4>
+                        <p>
+                            Ce projet a pour but de prédire le taux de conversion d'un site web
+                            en fonction de ses métriques de performance, utilisant des techniques
+                            de Machine Learning et un framework web Django.
+                        </p>
+                        
+                        <h4 class="mt-4">Dataset Utilisé</h4>
+                        <ul>
+                            <li><strong>Nom :</strong> Website Traffic and User Engagement Metrics</li>
+                            <li><strong>Source :</strong> Kaggle (Anthony Therrien)</li>
+                            <li><strong>Enregistrements :</strong> 2,000</li>
+                            <li><strong>Features :</strong> 7 métriques de performance web</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h4>Technologies Utilisées</h4>
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <div class="bg-primary bg-opacity-10 p-3 rounded text-center">
+                                    <i class="fab fa-python fa-3x text-primary mb-2"></i>
+                                    <h6 class="mb-0">Python</h6>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <div class="bg-success bg-opacity-10 p-3 rounded text-center">
+                                    <i class="fab fa-django fa-3x text-success mb-2"></i>
+                                    <h6 class="mb-0">Django</h6>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <div class="bg-warning bg-opacity-10 p-3 rounded text-center">
+                                    <i class="fas fa-brain fa-3x text-warning mb-2"></i>
+                                    <h6 class="mb-0">Scikit-learn</h6>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <div class="bg-info bg-opacity-10 p-3 rounded text-center">
+                                    <i class="fab fa-bootstrap fa-3x text-info mb-2"></i>
+                                    <h6 class="mb-0">Bootstrap 5</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                {% if model_loaded %}
+                <div class="alert alert-success mt-4">
+                    <h5><i class="fas fa-check-circle me-2"></i>Modèle ML Chargé</h5>
+                    <p class="mb-0">
+                        Le modèle Random Forest est correctement chargé et prêt à faire des prédictions.
+                    </p>
+                </div>
+                
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Performances du Modèle</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col-md-3 mb-3">
+                                <div class="p-3 bg-primary bg-opacity-10 rounded">
+                                    <h2 class="text-primary">{{ performance.mae|floatformat:3 }}</h2>
+                                    <p class="mb-0">MAE</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="p-3 bg-success bg-opacity-10 rounded">
+                                    <h2 class="text-success">{{ performance.mse|floatformat:3 }}</h2>
+                                    <p class="mb-0">MSE</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="p-3 bg-warning bg-opacity-10 rounded">
+                                    <h2 class="text-warning">{{ performance.rmse|floatformat:3 }}</h2>
+                                    <p class="mb-0">RMSE</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="p-3 bg-info bg-opacity-10 rounded">
+                                    <h2 class="text-info">{{ performance.r2|floatformat:3 }}</h2>
+                                    <p class="mb-0">R² Score</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
+                <div class="text-center mt-4">
+                    <a href="/predict/" class="btn btn-primary btn-lg me-3">
+                        <i class="fas fa-magic me-2"></i>Tester le Modèle
+                    </a>
+                    <a href="/" class="btn btn-outline-secondary btn-lg">
+                        <i class="fas fa-home me-2"></i>Retour à l'Accueil
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
